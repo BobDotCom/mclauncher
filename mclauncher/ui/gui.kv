@@ -1,0 +1,31 @@
+<LblTxt@BoxLayout>:
+    orientation: 'horizontal'
+    lblTxtIn: 'default'
+    theTxt: iAmTxt
+    Label:
+        text: root.lblTxtIn
+    TextInput:
+        id: iAmTxt
+        text: 'txt'
+
+<McLauncher@BoxLayout>:
+    orientation: 'vertical'
+
+    LblTxt:
+        id: lt0
+        lblTxtIn: 'LblTxtInput0'
+
+    LblTxt:
+        id: lt1
+        lblTxtIn: 'LblTxtInput1'
+
+    LblTxt:
+        id: lt2
+        lblTxtIn: 'LblTxtInput2'
+
+
+    Button:
+        text: 'print LblTxtInput [0, 1, 2]'
+        on_release: print lt0.theTxt.text, lt1.theTxt.text, lt2.theTxt.text
+
+McLauncher
