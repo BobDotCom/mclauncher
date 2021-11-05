@@ -5,10 +5,6 @@ import re
 import setuptools
 
 
-requirements = []
-with open('requirements.txt') as f:
-    # noinspection PyRedeclaration
-    requirements = f.read().splitlines()
 
 
 def read(rel_path):
@@ -16,6 +12,11 @@ def read(rel_path):
     with codecs.open(os.path.join(here, rel_path), 'r') as fp:
         return fp.read()
 
+
+requirements = []
+with open('requirements.txt') as f:
+    # noinspection PyRedeclaration
+    requirements = f.read().splitlines()
 
 version = ''
 
