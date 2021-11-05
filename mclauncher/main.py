@@ -110,7 +110,8 @@ def launch(gui: bool = False, args=None):
     java_logger = logging.getLogger("minecraft")
     gui_logger = logging.getLogger("mclauncher_gui")
 
-    if args.gui:
+    if False:  # if args.gui:
+        # Gui disabled for now
         logger.info("Running gui")
         launch(gui=True)
         return
