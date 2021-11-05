@@ -1,6 +1,6 @@
 import mclauncher
 
 
-def main():
+def test_main():
     # TODO: Add tests
-    assert True
+    assert 1 == 1
