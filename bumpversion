@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 getValueFromConfig() {
-    current_version="$(grep "${1}" bumpversion.cfg  | cut -d '=' -f 2)"
+    current_version="$(grep "${1}" .bumpversion.cfg  | cut -d '=' -f 2)"
 }
 
 what_to_do(){
