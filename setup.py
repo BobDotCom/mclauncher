@@ -65,7 +65,7 @@ setuptools.setup(
     download_url='https://github.com/BobDotCom/mclauncher/releases',
     packages=packages,
     classifiers=[
-        "Development Status :: 3 - Pre-Alpha",
+        "Development Status :: 2 - Pre-Alpha",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
