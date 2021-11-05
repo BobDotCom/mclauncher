@@ -1,0 +1,5 @@
+minecraft-launcher-lib @ git+https://github.com/BobDotCom/minecraft-launcher-lib/
+Flask
+requests
+click
+Kivy
