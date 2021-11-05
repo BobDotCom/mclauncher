@@ -23,6 +23,7 @@ SOFTWARE.
 """
 
 import argparse
+import json
 import logging
 import os
 import socket
@@ -272,9 +273,26 @@ def launch(gui: bool = False, args=None):
     req = requests.post("https://mclauncher-backend.scienceandtecha.repl.co/authorize", data={"code": auth_code})
     login_data = req.json()
 
+    game_dir = None
+
+    launcher_profiles = os.path.join(minecraft_directory, "launcher_profiles.json")
+    if os.path.exists(launcher_profiles):
+        with open(launcher_profiles, "r") as f:
+            data = json.load(f)
+        if data.get("profiles"):
+            profiles = data["profiles"]
+            for v in profiles.values():
+                if v.get("lastVersionId") == latest_version:
+                    logger.info(f"Found profile in launcher profiles for {latest_version}")
+                    game_dir = v.get("gameDir")
+                    break
+
     # Get Minecraft command
     minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(latest_version, minecraft_directory,
                                                                              login_data)
+
+    if game_dir is not None:
+        minecraft_command[minecraft_command.index("--gameDir") + 1] = game_dir
 
     if minecraft_command[0] == "java":
         minecraft_command[0] = os.getenv("HOME") + "/Library/Application Support/minecraft/runtime/jre-legacy/mac-os/" \
