@@ -50,11 +50,7 @@ if version.endswith(('a', 'b', 'rc')):
         pass
 
 with open("README.rst", "r") as fh:
-    long_description = fh.read().replace("""===================
-mclauncher
-===================""", """===================
-mclauncher {0}
-===================""".format(version))
+    long_description = fh.read()
 
 packages = [
     "mclauncher",
