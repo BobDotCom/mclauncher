@@ -5,18 +5,13 @@ import re
 import setuptools
 
 
-
-
 def read(rel_path):
     here = os.path.abspath(os.path.dirname(__file__))
     with codecs.open(os.path.join(here, rel_path), 'r') as fp:
         return fp.read()
 
 
-requirements = []
-with open('requirements.txt') as f:
-    # noinspection PyRedeclaration
-    requirements = f.read().splitlines()
+requirements = read('requirements.txt').splitlines()
 
 version = ''
 
