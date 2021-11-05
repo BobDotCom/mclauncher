@@ -1,5 +1,5 @@
 minecraft-launcher-lib @ git+https://github.com/BobDotCom/minecraft-launcher-lib/
 Flask>=0.9
 requests>=0.8.0,!=2.8.0
-click>8.0
-Kivy>=2.0
+click
+Kivy
