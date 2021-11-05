@@ -5,22 +5,56 @@ import re
 import setuptools
 
 
+requirements = []
+with open('requirements.txt') as f:
+    # noinspection PyRedeclaration
+    requirements = f.read().splitlines()
+
+
 def read(rel_path):
     here = os.path.abspath(os.path.dirname(__file__))
     with codecs.open(os.path.join(here, rel_path), 'r') as fp:
         return fp.read()
 
 
+version = ''
+
 # The full version, including alpha/beta/rc tags
 with open('mclauncher/__init__.py') as f:
-    __version__ = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1) or ''
+    search = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE)
+
+    if search is not None:
+        version = search.group(1)
+
+    else:
+        raise RuntimeError("Could not grab version string")
+
+if not version:
+    raise RuntimeError('version is not set')
+
+if version.endswith(('a', 'b', 'rc')):
+    # append version identifier based on commit count
+    try:
+        import subprocess
+        p = subprocess.Popen(['git', 'rev-list', '--count', 'HEAD'],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = p.communicate()
+        if out:
+            version += out.decode('utf-8').strip()
+        p = subprocess.Popen(['git', 'rev-parse', '--short', 'HEAD'],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = p.communicate()
+        if out:
+            version += '+g' + out.decode('utf-8').strip()
+    except Exception:
+        pass
 
 with open("README.rst", "r") as fh:
     long_description = fh.read().replace("""===================
 mclauncher
 ===================""", """===================
 mclauncher {0}
-===================""".format(__version__))
+===================""".format(version))
 
 packages = [
     "mclauncher",
@@ -29,7 +63,7 @@ packages = [
 
 setuptools.setup(
     name="mclauncher",
-    version=__version__,
+    version=version,
     author="BobDotCom",
     author_email="bobdotcomgt@gmail.com",
     description="A minecraft launcher made in python.",
@@ -39,18 +73,21 @@ setuptools.setup(
     download_url='https://github.com/BobDotCom/mclauncher/releases',
     packages=packages,
     classifiers=[
+        "Development Status :: 3 - Pre-Alpha",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent"
+        "Operating System :: OS Independent",
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities',
         ],
     python_requires='>=3.6',
-    install_requires=[
-        "minecraft-launcher-lib @ git+https://github.com/BobDotCom/minecraft-launcher-lib/",
-        "Flask",
-        "requests",
-        "click",
-        "kivy"
-    ],
+    install_requires=requirements,
     license='MIT',
     project_urls={
         'Documentation': 'https://mclauncher.readthedocs.io/en/latest/index.html',
@@ -58,6 +95,6 @@ setuptools.setup(
         'Tracker':       'https://github.com/BobDotCom/mclauncher/issues'
         },
     scripts=[
-        'bin/mclauncher'
+        'mclauncher/bin/mclauncher'
     ]
     )

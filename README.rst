@@ -1,7 +1,8 @@
 ==========
 mclauncher
 ==========
-A fully fledged launcher for Minecraft. Made in python, and supports almost all features of the official launcher.
+A fully fledged launcher for Minecraft. Made in python, and supports almost all features of the official launcher. Not
+tested on Windows.
 
 Usage
 -----
