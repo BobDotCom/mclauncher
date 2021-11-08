@@ -62,9 +62,9 @@ def launch(gui: bool = False, args=None):
     parser.add_argument("--no-install", dest="no_install", default=False, action="store_true",
                         help="Don't run the install script at all, try to run locally installed version if "
                              "possible.")
-    parser.add_argument('-v', dest="verbose", action='count', default=0,
+    parser.add_argument('-v', dest="verbose", action='count', default=3,
                         help="Set verbosity. Can be supplied multiple times to increase verbosity, max "
-                             f"{max_verbosity}.")
+                             f"{max_verbosity}. Defaults to 3. (1: Critical, 2: Error, 3: Warning, 4: Info, 5: Debug)")
     parser.add_argument('--version', "-V", action='version', version='%(prog)s ' + __version__)
     parser.add_argument('--manual-auth', "-m", dest="manual_auth", action="store_true", default=False,
                         help="Manually visit and paste url for authentication. When false, the script will create "
@@ -102,13 +102,20 @@ def launch(gui: bool = False, args=None):
     if args.verbose > max_verbosity:
         ui.error(f"Verbosity level ({args.verbose}) exceeded max verbosity ({max_verbosity})")
 
+    log_level = (max_verbosity + 1 - args.verbose) * 10
+
     # noinspection PyTypeChecker
-    logging.basicConfig(level=(max_verbosity - args.verbose) * 10,
+    logging.basicConfig(level=log_level,
                         format="$asctime [$levelname] ($name): $message", style="$")
 
     logger = logging.getLogger(__name__)
     java_logger = logging.getLogger("minecraft")
     gui_logger = logging.getLogger("mclauncher_gui")
+
+    # Set logging level for everything
+    loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+    for logger in loggers:
+        logger.setLevel(log_level)
 
     if False:  # if args.gui:
         # Gui disabled for now
@@ -120,6 +127,11 @@ def launch(gui: bool = False, args=None):
         from .ui import gui
         app = gui.prep()()
         app.run()
+    if args.gui:
+        parser.error("GUI mode is disabled for now.")
+
+    # Quick intro
+    print("If no further input is required, you will be prompted to login momentarily.")
 
     def forge(vanilla_version, java_path, mc_directory):
         if args.forge is not True:
@@ -296,8 +308,12 @@ def launch(gui: bool = False, args=None):
         minecraft_command[minecraft_command.index("--gameDir") + 1] = game_dir
 
     if minecraft_command[0] == "java":
-        minecraft_command[0] = os.getenv("HOME") + "/Library/Application Support/minecraft/runtime/jre-legacy/mac-os/" \
-                                                   "jre-legacy/jre.bundle/Contents/Home/bin/java_path"
+        path = os.path.join(minecraft_directory, "runtime", "jre-legacy",
+                            "mac-os", "jre-legacy", "jre.bundle", "Contents", "Home", "bin")
+        if os.path.exists(os.path.join(path, "java")):
+            minecraft_command[0] = os.path.join(path, "java")
+        elif os.path.exists(os.path.join(path, "java_path")):
+            minecraft_command[0] = os.path.join(path, "java_path")
 
     logger.debug(f"Running command: {' '.join(minecraft_command)}")
 

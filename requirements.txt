@@ -1,4 +1,4 @@
-minecraft-launcher-lib @ git+https://github.com/BobDotCom/minecraft-launcher-lib/
+minecraft-launcher-lib~=4.1
 Flask>=0.9
 requests>=0.8.0,!=2.8.0
 click

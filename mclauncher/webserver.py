@@ -40,6 +40,9 @@ def override_logger(log_level):
     global logger
     logger = logging.getLogger(__name__)
     logging.getLogger('werkzeug').setLevel(log_level)
+    loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+    for logger in loggers:
+        logger.setLevel(log_level)
 
     click_echo = click.echo
     click_secho = click.secho
