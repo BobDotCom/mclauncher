@@ -21,16 +21,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from kivy.lang import Builder
-
+try:
+    from kivy.lang import Builder
+except ImportError:
+    pass  # Kivy is not installed. Doesn't matter though since we don't use it.
 
 def prep():
-    import kivy
     from kivy.app import App
-    from kivy.uix.label import Label
-    from kivy.uix.gridlayout import GridLayout
-    from kivy.uix.textinput import TextInput
-    from kivy.uix.button import Button
     from kivy.uix.widget import Widget
     from kivy.properties import ObjectProperty
 
