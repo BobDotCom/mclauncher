@@ -39,7 +39,7 @@ from .pipe import LogPipe
 from .webserver import run_server
 from .ui import Gui, Cli
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def launch(gui: bool = False, args=None):
