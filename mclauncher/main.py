@@ -258,7 +258,7 @@ def launch(gui: bool = False, args=None):
             return s.getsockname()[1]
 
     # Login
-    redirect_url = 'https://mclauncher-backend.scienceandtecha.repl.co/authorize'
+    redirect_url = 'https://mclauncher.bobdotcom.xyz/authorize'
     client_id = "d83138ec-c608-4b87-959d-0b228f218bb3"
     port = find_free_port()
     login_url = minecraft_launcher_lib.microsoft_account.get_login_url(client_id, redirect_url).replace("<optional;",
@@ -283,7 +283,7 @@ def launch(gui: bool = False, args=None):
         auth_code = minecraft_launcher_lib.microsoft_account.get_auth_code_from_url(code_url)
 
     # Get the login data
-    req = requests.post("https://mclauncher-backend.scienceandtecha.repl.co/authorize", data={"code": auth_code})
+    req = requests.post("https://mclauncher.bobdotcom.xyz/authorize", data={"code": auth_code})
     login_data = req.json()
 
     game_dir = None
