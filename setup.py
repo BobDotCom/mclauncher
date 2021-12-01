@@ -11,6 +11,16 @@ def read(rel_path):
         return fp.read()
 
 
+def exists(rel_path):
+    here = os.path.abspath(os.path.dirname(__file__))
+    return os.path.exists(os.path.join(here, rel_path))
+
+
+if exists("name.txt"):
+    project_name = (read("name.txt").splitlines() + [""])[0].strip()
+else:
+    project_name = "mclauncher"
+
 requirements = read('requirements.txt').splitlines()
 
 version = ''
@@ -54,7 +64,7 @@ packages = [
 ]
 
 setuptools.setup(
-    name="mclauncher",
+    name=project_name,
     version=version,
     author="BobDotCom",
     author_email="bobdotcomgt@gmail.com",
