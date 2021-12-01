@@ -4,6 +4,14 @@ mclauncher
 A fully fledged launcher for Minecraft. Made in python, and supports almost all features of the official launcher. Not
 tested on Windows.
 
+.. note::
+   The ``mclauncher`` project name is currently not working. You can install mclauncher with pip, but you will have to
+   use the name ``pymclauncher`` until the project name is fixed.
+
+   .. code-block:: bash
+      pip install pymclauncher
+
+
 DISCLAIMER
 ----------
 `This is not a cracked client/launcher!`
