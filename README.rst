@@ -6,11 +6,16 @@ tested on Windows.
 
 .. note::
    The ``mclauncher`` project name is currently not working. You can install mclauncher with pip, but you will have to
-   use the name ``pymclauncher`` until the project name is fixed.
+   use the name ``pymclauncher`` until the project name is fixed. The command to run the launcher remains
+   ``mclauncher`` (See :ref:`usage` for more details).
 
    .. code-block:: bash
       pip install pymclauncher
 
+      mclauncher -h
+
+
+.. _disclaimer:
 
 DISCLAIMER
 ----------
@@ -24,8 +29,13 @@ This being said, this program may not check to see if you have a valid account. 
 client using this program, but it is not recommended (It's against the terms of Minecraft to do so!). Hacked clients and
 modded clients are fine.
 
+
+.. _usage:
+
 Usage
 -----
+
+.. _install:
 
 Install
 ~~~~~~~
@@ -34,6 +44,9 @@ Install ``mclauncher`` using your favorite flavor of the pip package manager.
 .. code-block:: bash
 
     pip install mclauncher
+
+
+.. _running:
 
 Running
 ~~~~~~~
