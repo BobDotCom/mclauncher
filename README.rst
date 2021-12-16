@@ -6,8 +6,7 @@ tested on Windows.
 
 Note
 ----
-This package can be installed under both "mclauncher" and "pymclauncher". The former is the default, but the latter has
-some extra releases that were not released to the main package name (mclauncher) due to a mistake.
+This package can be installed under both "mclauncher" and "pymclauncher". The former is the default.
 
 DISCLAIMER
 ----------
