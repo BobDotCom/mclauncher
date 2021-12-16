@@ -6,15 +6,8 @@ tested on Windows.
 
 Note
 ----
-The ``mclauncher`` project name is currently not working. You can install mclauncher with pip, but you will have to use
-the name ``pymclauncher`` until the project name is fixed. The command to run the launcher remains ``mclauncher``.
-
-.. code-block:: bash
-
-    pip install pymclauncher
-
-    mclauncher -h
-
+This package can be installed under both "mclauncher" and "pymclauncher". The former is the default, but the latter has
+some extra releases that were not released to the main package name (mclauncher) due to a mistake.
 
 DISCLAIMER
 ----------
