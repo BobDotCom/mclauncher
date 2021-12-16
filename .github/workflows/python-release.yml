@@ -27,7 +27,7 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         echo "pymclauncher" > name.txt
-        twine upload dist/* || true
+        twine upload dist/*
         rm -rf dist
         python setup.py sdist bdist_wheel
         twine upload dist/*
